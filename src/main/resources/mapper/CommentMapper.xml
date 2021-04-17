@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qian.mapper.CommentMapper">
+
+
+    <select id="getLatestFiveComments" resultType="com.qian.vo.ViewComment">
+        SELECT comment_avatar, comment_content FROM blog.comment ORDER BY comment_date LIMIT 5 ;
+    </select>
+</mapper>
+
+
