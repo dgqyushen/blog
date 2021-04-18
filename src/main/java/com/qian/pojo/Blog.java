@@ -29,4 +29,6 @@ public class Blog implements Serializable {
     private String blogImage;
     @TableField(value = "blog_author")
     private String blogAuthor;
+    @TableField(value = "blog_top")
+    private Boolean isTop;
 }

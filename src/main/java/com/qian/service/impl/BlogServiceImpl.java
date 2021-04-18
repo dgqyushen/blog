@@ -28,7 +28,9 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 //        if (redisBlogs!=null){
 //           return redisBlogs;
 //        }
-        List<Blog> sqlBlogs = blogMapper.selectList(null);
+        QueryWrapper<Blog> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("blog_top","blog_created");
+        List<Blog> sqlBlogs = blogMapper.selectList(wrapper);
 //        redisTemplate.opsForValue().set("blogs",sqlBlogs);
         return sqlBlogs;
     }
