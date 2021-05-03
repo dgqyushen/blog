@@ -1,5 +1,6 @@
 package com.qian.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -15,7 +16,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @TableName(value = "blog")
 public class Blog implements Serializable {
-    @TableId(value = "blog_id")
+    @TableId(value = "blog_id",type = IdType.AUTO)
     private Integer blogId;
     @TableField(value = "blog_title")
     private String blogTitle;
