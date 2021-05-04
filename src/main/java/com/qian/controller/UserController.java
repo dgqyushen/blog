@@ -27,4 +27,9 @@ public class UserController {
         }
         return Result.returnResult(200,"",user);
     }
+
+    @RequestMapping(value = "/getNum")
+    public Map<String, Object> getUserNum(){
+        return Result.returnResult(200,"获取用户数量",userService.getUserNum());
+    }
 }

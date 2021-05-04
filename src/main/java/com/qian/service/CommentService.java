@@ -11,4 +11,6 @@ public interface CommentService extends IService<Comment> {
     int saveComment(Comment comment);
 
     List<Comment> getLatestComments();
+
+    Integer getAllCommentsNum();
 }

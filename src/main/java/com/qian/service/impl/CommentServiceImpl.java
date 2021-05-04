@@ -54,4 +54,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 //        List<Comment> comments = commentMapper.selectList(commentQueryWrapper);
        return commentMapper.selectList(commentQueryWrapper).subList(0,5);
     }
+
+    @Override
+    public Integer getAllCommentsNum() {
+        return commentMapper.selectList(null).size();
+    }
 }

@@ -50,6 +50,11 @@ public class CommentController {
         return Result.returnResult(200,"成功获取最新的5条评论数据",list);
     }
 
+    @RequestMapping(value = "/getNum",method = RequestMethod.GET)
+    public Map<String, Object> getCommentsNum(){
+        return Result.returnResult(200,"成功获取评论数目",commentService.getAllCommentsNum());
+    }
+
 
 
 

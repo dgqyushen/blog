@@ -23,6 +23,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return user;
         }
         return null;
+    }
 
+    @Override
+    public Integer getUserNum() {
+        return userMapper.selectList(null).size();
     }
 }
