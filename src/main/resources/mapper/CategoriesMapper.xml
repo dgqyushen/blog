@@ -7,8 +7,11 @@
 
 
     <select id="getAll" resultType="java.lang.String">
-        SELECT DISTINCT categories_name FROM blog.categories;
+--         SELECT DISTINCT categories_name FROM blog.categories;
+        SELECT categories_name FROM blog.categories b WHERE b.categories_deleted=0;
     </select>
+
+
 </mapper>
 
 

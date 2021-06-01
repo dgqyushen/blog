@@ -1,23 +1,25 @@
 package com.qian;
 
-import com.qian.service.VisitorService;
+import com.qian.controller.BlogController;
+import com.qian.mapper.CategoriesMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.Map;
 
 
 @SpringBootTest
 class BlogApplicationTests {
 
-
     @Autowired
-    VisitorService visitorService;
+    CategoriesMapper categoriesMapper;
 
     @Test
     void contextLoads() {
-
-        Integer visNum = visitorService.getVisNum();
-        System.out.println(visNum);
+        List<String> all = categoriesMapper.getAll();
+        all.forEach(System.out::println);
 
 
 

@@ -7,7 +7,7 @@
 
 
     <select id="getAll" resultType="com.qian.vo.ViewBlog">
-        SELECT blog_title,blog_created,blog_id FROM blog ORDER BY blog_created DESC;
+        SELECT blog_title,blog_created,blog_id FROM blog WHERE blog_deleted=0 ORDER BY blog_created DESC
     </select>
 </mapper>
 

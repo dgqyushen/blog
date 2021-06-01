@@ -15,5 +15,11 @@ public interface BlogMapper extends BaseMapper<Blog> {
 
     Date getBlogCreatedLatestDay();
 
+    List<Blog> getLatestFiveBlogsNameAndVisNum();
+
+    List<Blog> getBlogsInfo();
+
+
+
 
 }

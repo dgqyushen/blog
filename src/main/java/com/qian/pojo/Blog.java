@@ -1,15 +1,13 @@
 package com.qian.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,5 +29,18 @@ public class Blog implements Serializable {
     @TableField(value = "blog_author")
     private String blogAuthor;
     @TableField(value = "blog_top")
-    private Boolean isTop;
+    private Boolean blogTop;
+    @TableField(value = "blog_visit_num")
+    private Integer blogVisitNum;
+    @TableField(exist = false)
+    private String categoriesName;
+    @TableField(exist = false)
+    private List<String> tags;
+    @TableField(exist = false)
+    private Integer likeNum;
+    @TableField(exist = false)
+    private Integer visitNum;
+    @TableLogic
+    private Integer blogDeleted;
+
 }

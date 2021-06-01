@@ -7,12 +7,40 @@
 
 
     <select id="getBlogsByContent" resultType="com.qian.pojo.Blog">
-        select * from blog.blog b where b.blog_content like concat('%',#{content},'%')
+        select *
+        from blog.blog b
+        where b.blog_content like concat('%', #{content}, '%')
+        and b.blog_deleted = 0;
     </select>
 
     <select id="getBlogCreatedLatestDay" resultType="java.sql.Date">
-        SELECT blog_created FROM blog ORDER BY blog_created DESC LIMIT 1;
+        SELECT blog_created
+        FROM blog
+        ORDER BY blog_created DESC LIMIT 1;
     </select>
+
+    <select id="getLatestFiveBlogsNameAndVisNum" resultType="com.qian.pojo.Blog">
+        SELECT blog_title, blog_visit_num
+        FROM blog
+        WHERE blog_deleted = 0
+        ORDER BY blog_visit_num DESC LIMIT 5;
+    </select>
+    <select id="getBlogsInfo" resultType="com.qian.pojo.Blog">
+                select blog_id,blog_title,blog_created,blog_modified,blog_top,categories_name
+                from blog.blog b
+                left join blog.categories c
+                on b.blog_id = c.categories_blog_id
+                where b.blog_deleted =0;
+    </select>
+
+
+    <!--    <select id="getEasyBlogs" resultType="com.qian.eo.EasyBlog">-->
+    <!--        select blog_title,blog_created,blog_modified,blog_top,categories_name-->
+    <!--        from blog.blog b-->
+    <!--        left join blog.categories c-->
+    <!--        on b.blog_id = c.categories_blog_id;-->
+    <!--    </select>-->
+
 
 </mapper>
 

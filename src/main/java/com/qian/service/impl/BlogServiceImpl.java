@@ -3,8 +3,11 @@ package com.qian.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qian.mapper.BlogMapper;
+import com.qian.mapper.CategoriesMapper;
 import com.qian.pojo.Blog;
+import com.qian.pojo.Categories;
 import com.qian.service.BlogService;
+import com.qian.vo.ViewBlogs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
 
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    CategoriesMapper categoriesMapper;
 
     @Override
     public List<Blog> getAll() {
@@ -64,6 +70,70 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
         Blog blog = blogMapper.selectOne(wrapper);
 //        redisTemplate.opsForValue().set(queryBlogName,blog);
         return blog;
+    }
 
+    @Override
+    public List<Blog> getLatestFiveBlogsNameAndVisNum() {
+        return blogMapper.getLatestFiveBlogsNameAndVisNum();
+    }
+
+    @Override
+    public int saveBlog(ViewBlogs viewBlogs) {
+//        String author = viewBlogs.getAuthor();
+//        String content = viewBlogs.getContent();
+//        String title = viewBlogs.getTitle();
+//        String image = viewBlogs.getImage();
+//        return blogMapper.insert(new Blog(null,title,content,new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()),image,author,viewBlogs.getIsTop(),null));
+//        System.out.println(viewBlogs);
+//        return 1;
+        return blogMapper.insert(new Blog(null,viewBlogs.getTitle(),viewBlogs.getContent(),new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()),viewBlogs.getImage(),viewBlogs.getAuthor(),viewBlogs.getIsTop(),null,null,null,null,null,null));
+    }
+
+    @Override
+    public List<Blog> getBlogsInfo() {
+        List<Blog> blogsInfo = blogMapper.getBlogsInfo();
+        blogsInfo.forEach(e->{
+//            从redis数据库中查找
+            if (redisTemplate.opsForValue().get("blog_like_num" + e.getBlogId().toString())==null){
+                redisTemplate.opsForValue().set("blog_like_num" + e.getBlogId().toString(),0);
+                redisTemplate.opsForValue().set("blog_visit_num"+e.getBlogId().toString(),0);
+                e.setLikeNum(0);
+                e.setVisitNum(0);
+            }else {
+                e.setLikeNum((Integer) redisTemplate.opsForValue().get("blog_like_num" + e.getBlogId().toString()));
+                e.setVisitNum((Integer) redisTemplate.opsForValue().get("blog_visit_num" + e.getBlogId().toString()));
+            }
+        });
+        return blogsInfo;
+    }
+
+    @Override
+    public int changeBlogTopByBlogId(Boolean top, Integer blogId) {
+        Blog blog = new Blog();
+        blog.setBlogTop(top);
+        blog.setBlogId(blogId);
+        return blogMapper.updateById(blog);
+    }
+
+    @Override
+    public int deleteBlogById(Integer id) {
+        QueryWrapper<Categories> categoriesQueryWrapper = new QueryWrapper<>();
+        categoriesQueryWrapper.eq("categories_blog_id",id);
+        categoriesMapper.delete(categoriesQueryWrapper);
+        return blogMapper.deleteById(id);
+
+    }
+
+    @Override
+    public int updateBlog(ViewBlogs viewBlogs) {
+        return blogMapper.updateById(new Blog(viewBlogs.getId(), viewBlogs.getTitle(), viewBlogs.getContent(), null,new Date(System.currentTimeMillis()), viewBlogs.getImage(), viewBlogs.getAuthor(), viewBlogs.getIsTop(),null,null,null,null,null,0));
+    }
+
+    @Override
+    public int deleteBlogsById(int[] blogIdList) {
+        for (int i : blogIdList) {
+            deleteBlogById(i);
+        }
+        return 0;
     }
 }
