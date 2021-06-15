@@ -1,6 +1,7 @@
 package com.qian.controller;
 
-import com.qian.pojo.Blog;
+import com.qian.dto.SimpleBlogDTO;
+import com.qian.entity.Blog;
 import com.qian.result.Result;
 import com.qian.service.BlogService;
 import com.qian.vo.ViewBlogs;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +58,6 @@ public class BlogController {
     @RequestMapping(value = "/getBlogData",method = RequestMethod.GET)
     public Map<String, Object> getLatestFiveBlogsNameAndVisNum(){
         List<Blog> blogData = blogService.getLatestFiveBlogsNameAndVisNum();
-        System.out.println(blogData);
         return Result.returnResult(200,"成功获取博客数据",blogData);
     }
 
@@ -96,6 +95,21 @@ public class BlogController {
 //        System.out.println(Arrays.toString(blogIdList));
         return Result.returnResult(200,"成功删除博客",blogService.deleteBlogsById(blogIdList));
     }
+
+    @RequestMapping(value = "/getSimpleBlog",method = RequestMethod.GET)
+    public Map<String, Object> getSimpleBlog(){
+        return Result.returnResult(200,"成功获取博客的时间戳情况",blogService.getSimpleBlog());
+    }
+
+    @RequestMapping(value = "/getAllBlogsCharacterAccount",method = RequestMethod.GET)
+    public Map<String, Object> getAllBlogsCharacterAccount(){
+        return Result.returnResult(200,"成功获取所有博客字数",blogService.getAllBlogsCharacterAccount());
+    }
+
+
+
+
+
 
 
 }

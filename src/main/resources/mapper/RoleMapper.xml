@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qian.mapper.RoleMapper">
+    <insert id="insertRolePermission">
+        INSERT INTO role_permission (role_id, perm_id) VALUES(#{roleId},#{permId});
+    </insert>
+
+
+    <select id="getRoleNum" resultType="java.lang.Integer">
+        SELECT role_id FROM blog.role WHERE role_description = #{roleDescription};
+    </select>
+    <select id="getAll" resultType="com.qian.dto.RolePermDTO">
+        SELECT a.*, c.permission_name, c.permission_tag, c.permission_url FROM `role` a INNER JOIN role_permission b ON a.role_id = b.role_id INNER JOIN permission c ON b.perm_id = c.permission_id ORDER BY a.role_name;
+    </select>
+</mapper>

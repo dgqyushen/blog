@@ -6,7 +6,7 @@
 <mapper namespace="com.qian.mapper.BlogMapper">
 
 
-    <select id="getBlogsByContent" resultType="com.qian.pojo.Blog">
+    <select id="getBlogsByContent" resultType="com.qian.entity.Blog">
         select *
         from blog.blog b
         where b.blog_content like concat('%', #{content}, '%')
@@ -19,19 +19,22 @@
         ORDER BY blog_created DESC LIMIT 1;
     </select>
 
-    <select id="getLatestFiveBlogsNameAndVisNum" resultType="com.qian.pojo.Blog">
+    <select id="getLatestFiveBlogsNameAndVisNum" resultType="com.qian.entity.Blog">
         SELECT blog_title, blog_visit_num
         FROM blog
         WHERE blog_deleted = 0
         ORDER BY blog_visit_num DESC LIMIT 5;
     </select>
-    <select id="getBlogsInfo" resultType="com.qian.pojo.Blog">
+    <select id="getBlogsInfo" resultType="com.qian.entity.Blog">
                 select blog_id,blog_title,blog_created,blog_modified,blog_top,categories_name
                 from blog.blog b
                 left join blog.categories c
                 on b.blog_id = c.categories_blog_id
                 where b.blog_deleted =0;
     </select>
+    <select id="getAll" resultType="com.qian.dto.SimpleBlogDTO">
+        SELECT blog_title,blog_created,blog_id FROM blog WHERE blog_deleted=0 ORDER BY blog_created DESC
+     </select>
 
 
     <!--    <select id="getEasyBlogs" resultType="com.qian.eo.EasyBlog">-->

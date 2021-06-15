@@ -1,7 +1,7 @@
 package com.qian.service.impl;
 
 import com.qian.mapper.VisitMapper;
-import com.qian.pojo.Visit;
+import com.qian.entity.Visit;
 import com.qian.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

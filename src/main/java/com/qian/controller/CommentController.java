@@ -1,6 +1,6 @@
 package com.qian.controller;
 
-import com.qian.pojo.Comment;
+import com.qian.entity.Comment;
 import com.qian.result.Result;
 import com.qian.service.CommentService;
 import com.qian.vo.ViewComment;
@@ -36,11 +36,11 @@ public class CommentController {
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String saveComment(@RequestBody ViewComment viewComment){
-//        System.out.println(viewComment.toString());
+        System.out.println(viewComment.toString());
 //        return "123";
         Date date = new Date(System.currentTimeMillis());
 //        后期添加头像功能
-        commentService.saveComment(new Comment(null,viewComment.getCommentBlogId(),viewComment.getCommentContent(),date,viewComment.getCommentAuthor(),null));
+        commentService.saveComment(new Comment(null,viewComment.getCommentBlogId(),viewComment.getCommentContent(),date,viewComment.getCommentAuthor(),viewComment.getCommentAvatar(),0));
         return "succeed";
     }
 
@@ -53,6 +53,23 @@ public class CommentController {
     @RequestMapping(value = "/getNum",method = RequestMethod.GET)
     public Map<String, Object> getCommentsNum(){
         return Result.returnResult(200,"成功获取评论数目",commentService.getAllCommentsNum());
+    }
+
+    @RequestMapping(value = "getCommentsData",method = RequestMethod.GET)
+    public Map<String, Object> getCommentsData(){
+        return Result.returnResult(200,"成功获取后台评论数据",commentService.getCommentData());
+    }
+
+    @RequestMapping(value = "/deleteComment/{id}",method = RequestMethod.POST)
+    public Map<String, Object> deleteComment(@PathVariable Integer id){
+//        System.out.println(id);
+        return Result.returnResult(200,"成功删除评论",commentService.deleteComment(id));
+    }
+
+    @RequestMapping(value = "/deleteComments",method = RequestMethod.POST)
+    public Map<String, Object> deleteComments(@RequestBody int[] postData){
+        return Result.returnResult(200,"成功删除评论集",commentService.deleteComments(postData));
+
     }
 
 

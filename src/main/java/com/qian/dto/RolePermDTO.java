@@ -1,0 +1,17 @@
+package com.qian.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class RolePermDTO {
+    private Integer roleId;
+    private String roleName;
+    private String roleDescription;
+    private String permissionName;
+    private String permissionTag;
+    private String permissionUrl;
+}

@@ -9,6 +9,10 @@
     <select id="getLatestFiveComments" resultType="com.qian.vo.ViewComment">
         SELECT comment_avatar, comment_content FROM blog.comment ORDER BY comment_date LIMIT 5 ;
     </select>
+    <select id="getCommentData" resultType="com.qian.dto.CommentDTO">
+--         SELECT comment_id, comment_content, comment_date,comment_author, comment_avatar, blog_title FROM comment LEFT JOIN blog ON comment.comment_blog_id = blog.blog_id WHERE comment.comment_deleted = 0 ORDER BY comment_date DESC ;
+        SELECT comment_id, comment_content, comment_date,comment_author, comment_avatar, blog_title FROM blog.comment LEFT JOIN blog ON comment.comment_blog_id = blog.blog_id WHERE comment.comment_deleted = 0 ORDER BY comment_date DESC ;
+    </select>
 </mapper>
 
 

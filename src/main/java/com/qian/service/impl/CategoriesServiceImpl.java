@@ -4,17 +4,15 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.qian.mapper.CategoriesMapper;
 import com.qian.mapper.CategoryMapper;
-import com.qian.pojo.Categories;
-import com.qian.pojo.Category;
+import com.qian.entity.Categories;
+import com.qian.entity.Category;
 import com.qian.service.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.IntStream;
 
 @Service
 public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categories> implements CategoriesService {
@@ -108,5 +106,12 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
     @Override
     public List<String> getCategoryList() {
         return categoryMapper.getCategoryList();
+    }
+
+    @Override
+    public int deleteCategories(int[] categories) {
+        IntStream stream = Arrays.stream(categories);
+        stream.forEach(this::deleteCategory);
+        return 0;
     }
 }

@@ -1,8 +1,8 @@
 package com.qian.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.qian.pojo.Categories;
-import com.qian.pojo.Category;
+import com.qian.entity.Categories;
+import com.qian.entity.Category;
 
 import java.util.List;
 import java.util.Map;
@@ -18,4 +18,5 @@ public interface CategoriesService extends IService<Categories> {
     int settingCategory(Map<String, Object> map);
     int deleteCategory(int id);
     List<String> getCategoryList();
+    int deleteCategories(int[] categories);
 }

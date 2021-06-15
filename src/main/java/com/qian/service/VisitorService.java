@@ -1,6 +1,6 @@
 package com.qian.service;
 
-import com.qian.pojo.Visit;
+import com.qian.entity.Visit;
 
 import java.util.List;
 

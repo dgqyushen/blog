@@ -1,26 +1,30 @@
 package com.qian;
 
-import com.qian.controller.BlogController;
-import com.qian.mapper.CategoriesMapper;
+import com.qian.entity.Blog;
+import com.qian.mapper.BlogMapper;
+import com.qian.mapper.RoleMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @SpringBootTest
 class BlogApplicationTests {
 
     @Autowired
-    CategoriesMapper categoriesMapper;
+    BlogMapper blogMapper;
+
 
     @Test
     void contextLoads() {
-        List<String> all = categoriesMapper.getAll();
-        all.forEach(System.out::println);
-
+        int length;
+        List<Blog> blogs = blogMapper.selectList(null);
+        length = blogs.stream().mapToInt(e -> e.getBlogContent().length()).sum();
+        System.out.println(length);
 
 
     }

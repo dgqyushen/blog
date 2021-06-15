@@ -1,7 +1,8 @@
 package com.qian.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.qian.pojo.Blog;
+import com.qian.dto.SimpleBlogDTO;
+import com.qian.entity.Blog;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,8 @@ public interface BlogMapper extends BaseMapper<Blog> {
     List<Blog> getLatestFiveBlogsNameAndVisNum();
 
     List<Blog> getBlogsInfo();
+
+    List<SimpleBlogDTO> getAll();
 
 
 

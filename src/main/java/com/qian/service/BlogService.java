@@ -1,7 +1,8 @@
 package com.qian.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.qian.pojo.Blog;
+import com.qian.dto.SimpleBlogDTO;
+import com.qian.entity.Blog;
 import com.qian.vo.ViewBlogs;
 
 import java.sql.Date;
@@ -29,4 +30,8 @@ public interface BlogService extends IService<Blog> {
     int updateBlog(ViewBlogs viewBlogs);
 
     int deleteBlogsById(int[] blogIdList);
+
+    List<SimpleBlogDTO> getSimpleBlog();
+
+    int getAllBlogsCharacterAccount();
 }

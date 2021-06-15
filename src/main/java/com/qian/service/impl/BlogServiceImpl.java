@@ -2,10 +2,11 @@ package com.qian.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.qian.dto.SimpleBlogDTO;
 import com.qian.mapper.BlogMapper;
 import com.qian.mapper.CategoriesMapper;
-import com.qian.pojo.Blog;
-import com.qian.pojo.Categories;
+import com.qian.entity.Blog;
+import com.qian.entity.Categories;
 import com.qian.service.BlogService;
 import com.qian.vo.ViewBlogs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,5 +136,16 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
             deleteBlogById(i);
         }
         return 0;
+    }
+
+    @Override
+    public List<SimpleBlogDTO> getSimpleBlog() {
+        return blogMapper.getAll();
+    }
+
+    @Override
+    public int getAllBlogsCharacterAccount() {
+        List<Blog> blogs = blogMapper.selectList(null);
+        return blogs.stream().mapToInt(e -> e.getBlogContent().length()).sum();
     }
 }

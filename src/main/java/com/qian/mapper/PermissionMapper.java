@@ -1,14 +1,11 @@
 package com.qian.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.qian.entity.Visit;
+import com.qian.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Mapper
 @Repository
-public interface VisitMapper extends BaseMapper<Visit> {
-    List<Visit> getLatestFiveVisits();
+public interface PermissionMapper extends BaseMapper<Permission> {
 }

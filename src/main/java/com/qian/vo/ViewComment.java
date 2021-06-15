@@ -12,5 +12,6 @@ public class ViewComment {
     private String commentAuthor;
     private String commentContent;
     private Integer commentBlogId;
+    private String commentAvatar;
 
 }

@@ -6,7 +6,7 @@
 <mapper namespace="com.qian.mapper.VisitMapper">
 
 
-    <select id="getLatestFiveVisits" resultType="com.qian.pojo.Visit">
+    <select id="getLatestFiveVisits" resultType="com.qian.entity.Visit">
         SELECT visit_id AS id,visit_date AS date,visit_num FROM visit ORDER BY visit_date DESC LIMIT 5;
     </select>
 

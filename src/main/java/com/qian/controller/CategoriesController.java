@@ -1,6 +1,6 @@
 package com.qian.controller;
 
-import com.qian.pojo.Categories;
+import com.qian.entity.Categories;
 import com.qian.result.Result;
 import com.qian.service.CategoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +72,10 @@ public class CategoriesController {
         return Result.returnResult(200,"获取分类表格",categoriesService.getCategoryList());
     }
 
-
+    @RequestMapping(value = "/deleteCategories",method = RequestMethod.POST)
+    public Map<String, Object> deleteCategories(@RequestBody int[] categoryList){
+//        return Result.returnResult(200,"成功删除分类数据", categoriesService.deleteCategories(list));
+//        System.out.println(categoryList);
+        return Result.returnResult(200,"成功删除分类数据", categoriesService.deleteCategories(categoryList));
+    }
 }

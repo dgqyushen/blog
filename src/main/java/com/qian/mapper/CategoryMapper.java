@@ -1,7 +1,7 @@
 package com.qian.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.qian.pojo.Category;
+import com.qian.entity.Category;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
