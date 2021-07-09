@@ -80,6 +80,9 @@ public class CategoriesServiceImpl extends ServiceImpl<CategoriesMapper, Categor
 
     @Override
     public int addCategory(String name) {
+        if (name==null||name.length()==0){
+            return -1;
+        }
         return categoryMapper.insert(new Category(null,name,new Date(System.currentTimeMillis()),0));
     }
 
